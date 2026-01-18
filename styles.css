@@ -1,0 +1,108 @@
+/* === Стиль в стиле блок-схемы (как на изображении) === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Courier New", monospace;
+  background: #ffffff;
+  color: #000000;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 2px solid #000;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.scroller {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+.image-track {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #000 transparent;
+}
+
+.image-track::-webkit-scrollbar {
+  height: 8px;
+}
+
+.image-track::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+
+.image-track img {
+  width: 100vw;
+  height: 90vh;
+  object-fit: contain;
+  background: #fff;
+  border-right: 2px solid #000;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.image-track img:hover {
+  transform: scale(1.005);
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease;
+}
+
+.scroll-btn:hover {
+  background: #f0f0f0;
+}
+
+.scroll-btn.left {
+  left: 10px;
+}
+
+.scroll-btn.right {
+  right: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  border-top: 2px solid #000;
+  font-size: 0.9rem;
+}

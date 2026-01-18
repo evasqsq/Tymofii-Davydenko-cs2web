@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kontaktný Formulár - CS2 Major Turnaje">
+    <title>Kontaktný Formulár - CS2 Major Turnaje</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <h1>🏆 CS2 Major Turnaje</h1>
+                <p class="tagline">Legendárne súboje svetového esportu</p>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Domov</a></li>
+                    <li><a href="major_turnaments.html">Major Turnaje</a></li>
+                    <li><a href="best_teams.html">Legendárne Tímy</a></li>
+                    <li><a href="formular.html" class="active">Kontaktný Formulár</a></li>
+                    <li><a href="all_hws.html">Ulohy</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="page-header">
+                <h1>📧 Kontaktný Formulár</h1>
+                <p>Máte otázku alebo spätnú väzbu? Pošlite nám správu!</p>
+            </section>
+
+            <section class="form-section">
+                <div class="form-container">
+                    <?php
+                        $success = '';
+                        $error = '';
+
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            $name = htmlspecialchars(trim($_POST['name']));
+                            $email = htmlspecialchars(trim($_POST['email']));
+                            $subject = htmlspecialchars(trim($_POST['subject']));
+                            $message = htmlspecialchars(trim($_POST['message']));
+
+                            if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+                                $error = "Vyplňte všetky povinné polia!";
+                            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                $error = "Email nie je platný!";
+                            } else {
+                                $to = 'cs2.major@example.com';
+                                $headers = "From: $email\r\nContent-Type: text/plain; charset=UTF-8";
+                                $body = "Meno: $name\nEmail: $email\nTéma: $subject\n\nSpráva:\n$message";
+                                
+                                if (mail($to, $subject, $body, $headers)) {
+                                    $success = "Správa bola úspešne odoslaná! Ďakujeme za vaš kontakt.";
+                                } else {
+                                    $error = "Došlo k chybe pri odosielaní správy. Skúste neskôr.";
+                                }
+                            }
+                        }
+                    ?>
+
+                    <?php if ($success): ?>
+                        <div class="alert alert-success">
+                            ✅ <?php echo $success; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($error): ?>
+                        <div class="alert alert-error">
+                            ❌ <?php echo $error; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form method="POST" action="formular.html" class="contact-form">
+                        <fieldset>
+                            <legend>Vaše Osobné Informácie</legend>
+                            
+                            <div class="form-group">
+                                <label for="name">Meno a Priezvisko: <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" placeholder="Zadajte vaše meno" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email: <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="vas@email.com" required>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Vaša Správa</legend>
+                            
+                            <div class="form-group">
+                                <label for="subject">Téma: <span class="required">*</span></label>
+                                <input type="text" id="subject" name="subject" placeholder="Téma vašej správy" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Správa: <span class="required">*</span></label>
+                                <textarea id="message" name="message" rows="6" placeholder="Napíšte vašu správu..." required></textarea>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Moje Záujmy</legend>
+                            
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" name="interests" value="Major Turnaje">
+                                    Zaujíma ma viac o Major turnajoch
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interests" value="Tímy">
+                                    Zaujímajú ma profesionálne tímy
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interests" value="Esports">
+                                    Chcem sa dozvedieť viac o esporte
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="interests" value="Spolupráca">
+                                    Mám záujem o spoluprácu
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Potvrdenie</legend>
+                            
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" name="agreement" required>
+                                    Súhlasím so spracovaním mojich osobných údajov <span class="required">*</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Odoslať Správu</button>
+                            <button type="reset" class="btn btn-secondary">Vymazať Formulár</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="contact-info">
+                <h2>Ďalšie Kontaktné Informácie</h2>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <h3>📍 Sídlo</h3>
+                        <p>Kosice, Slovensko</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📧 Email</h3>
+                        <p>cs2.major@example.com</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>⏰ Čas Odpovede</h3>
+                        <p>24 - 48 hodín</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 CS2 Major Turnaje</p>
+            <p>Meno a Priezvisko: Tymofii Davydenko</p>
+            <p>Dátum: 2026-01-17</p>
+        </footer>
+    </div>
+</body>
+</html>

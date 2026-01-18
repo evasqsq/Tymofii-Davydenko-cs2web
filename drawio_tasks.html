@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Algorithms</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Algorithms</h1>
+  </header>
+
+  <main>
+    <div class="scroller">
+      <button class="scroll-btn left">◀</button>
+      <div class="image-track" id="imageTrack">
+        <img src="1.png" alt="Algorithm 1">
+        <img src="2.png" alt="Algorithm 2">
+        <img src="3.png" alt="Algorithm 3">
+        <img src="4.png" alt="Algorithm 4">
+      </div>
+      <button class="scroll-btn right">▶</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Draw IO</p>
+  </footer>
+
+  <script>
+    const track = document.getElementById('imageTrack');
+    const btnLeft = document.querySelector('.left');
+    const btnRight = document.querySelector('.right');
+
+    btnLeft.addEventListener('click', () => {
+      track.scrollBy({ left: -window.innerWidth, behavior: 'smooth' });
+    });
+
+    btnRight.addEventListener('click', () => {
+      track.scrollBy({ left: window.innerWidth, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

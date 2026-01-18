@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Priezvisko Meno: Formulár</title>
+
+    <style>
+
+        :root{
+            --bg: #f3f6fb;
+            --card-radius: 12px;
+            --shadow: 0 8px 22px rgba(16,30,44,0.08);
+            --accent-purple: #efe8ff;
+            --accent-blue: #e7f3ff;
+            --accent-mint: #eaf8f0;
+            --accent-sand: #fff8e6;
+            --text: #1a2230;
+            --muted: #6b7280;
+            --primary: #37a76f;
+            --muted-btn: #bfc8d6;
+        }
+
+        * { box-sizing: border-box; }
+        html,body { height: 100%; margin: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+        }
+
+        .form-card {
+            width: 920px;
+            max-width: calc(100% - 40px);
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+
+        .form-title {
+            margin: 0 0 14px 0;
+            font-size: 20px;
+            text-align: center;
+            color: var(--text);
+        }
+
+        .card {
+            border-radius: 10px;
+            padding: 14px;
+            margin: 12px 0;
+            box-shadow: 0 4px 10px rgba(16,30,44,0.04);
+        }
+
+        .section--purple { background: var(--accent-purple); }
+        .section--blue   { background: var(--accent-blue); }
+        .section--mint   { background: var(--accent-mint); }
+        .section--sand   { background: var(--accent-sand); }
+
+        .section-title {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.6);
+            display: inline-block;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .field { margin: 8px 0; display: flex; flex-direction: column; }
+        .field label { margin-bottom: 6px; font-size: 13px; color: var(--muted); }
+        .field input[type="text"],
+        .field input[type="password"],
+        .field input[type="email"],
+        .field input[type="tel"],
+        .field input[type="date"],
+        .field input[type="time"],
+        .field select,
+        .field textarea {
+            border: 1px solid #d6dce6;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+            background: #fff;
+            color: var(--text);
+            outline: none;
+            transition: box-shadow .18s ease, border-color .18s ease;
+        }
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            box-shadow: 0 6px 18px rgba(55,167,111,0.12);
+            border-color: #89d0a0;
+        }
+
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: end; }
+
+        .field-inline { display:flex; align-items:center; gap:12px; margin-top:8px; }
+        .label-inline { color:var(--muted); margin-right:8px; font-size:13px; }
+        .radio input { margin-right:6px; }
+
+        textarea { min-height: 110px; resize: vertical; }
+
+        .form-actions {
+            display:flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: transform .08s ease, box-shadow .12s ease;
+        }
+        .btn--primary {
+            background: linear-gradient(180deg,var(--primary), #238a55);
+            color: white;
+            box-shadow: 0 8px 20px rgba(35,138,85,0.18);
+        }
+        .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(35,138,85,0.18); }
+
+        .btn--muted {
+            background: var(--muted-btn);
+            color: #1a2230;
+        }
+        .btn--muted:hover { transform: translateY(-1px); }
+
+        @media (max-width: 900px) {
+            .form-card { padding: 16px; width: calc(100% - 24px); }
+            .row-2, .row-3 { grid-template-columns: 1fr; }
+            .form-actions { justify-content: center; flex-direction: column-reverse; gap: 10px; }
+            .form-actions .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="page">
+    <form class="form-card" action="#" method="post" novalidate>
+        <h1 class="form-title">Vstupný formulár záujemcu</h1>
+
+        <section class="card section--purple">
+            <h2 class="section-title">Osobné údaje</h2>
+
+            <div class="field">
+                <label for="meno">Meno</label>
+                <input id="meno" name="meno" type="text" required placeholder="Meno">
+            </div>
+
+            <div class="field">
+                <label for="priezvisko">Priezvisko</label>
+                <input id="priezvisko" name="priezvisko" type="text" required placeholder="Priezvisko">
+            </div>
+
+            <div class="row-2">
+                <div class="field">
+                    <label for="datum">Dátum narodenia</label>
+                    <input id="datum" name="datum" type="date" required>
+                </div>
+
+                <div class="field">
+                    <label for="vzdelanie">Vzdelanie</label>
+                    <select id="vzdelanie" name="vzdelanie" required>
+                        <option value="">Vyberte...</option>
+                        <option>Základné vzdelanie</option>
+                        <option>Stredoškolské vzdelanie</option>
+                        <option>Stredoškolské vzdelanie s maturitou</option>
+                        <option>Vysokoškolské vzdelanie I. stupňa</option>
+                        <option>Vysokoškolské vzdelanie II. stupňa</option>
+                        <option>Vysokoškolské vzdelanie III. stupňa</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row-2">
+                <div class="field">
+                    <label for="telefon">Telefón</label>
+                    <input id="telefon" name="telefon" type="tel" placeholder="+421 9xx xxx xxx">
+                </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="meno@priklad.sk">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="heslo">Heslo</label>
+                <input id="heslo" name="heslo" type="password" required placeholder="Heslo">
+            </div>
+        </section>
+
+        <section class="card section--blue">
+            <h2 class="section-title">Pracovná pozícia</h2>
+
+            <div class="field">
+                <label for="pozicia">Mám záujem o</label>
+                <input id="pozicia" name="pozicia" type="text" placeholder="Napr. Letecký pilot">
+            </div>
+
+            <div class="field-inline">
+                <span class="label-inline">Požadujem ubytovanie:</span>
+                <label class="radio"><input type="radio" name="ubytovanie" value="ano"> áno</label>
+                <label class="radio"><input type="radio" name="ubytovanie" value="nie" checked> nie</label>
+            </div>
+        </section>
+
+        <section class="card section--mint">
+            <h2 class="section-title">Stretnutie</h2>
+
+            <div class="field">
+                <label for="tema">Téma stretnutia</label>
+                <input id="tema" name="tema" type="text" placeholder="Téma stretnutia">
+            </div>
+
+            <div class="row-3">
+                <div class="field">
+                    <label for="datumstret">Dátum stretnutia</label>
+                    <input id="datumstret" name="datumstret" type="date" min="2020-11-16" required>
+                </div>
+
+                <div class="field">
+                    <label for="casstret">Čas stretnutia</label>
+                    <input id="casstret" name="casstret" type="time" required>
+                </div>
+
+                <div class="field">
+                    <label for="miestostret">Miesto stretnutia</label>
+                    <input id="miestostret" name="miestostret" type="text" placeholder="Uveďte miesto" required>
+                </div>
+            </div>
+        </section>
+
+        <section class="card section--sand">
+            <h2 class="section-title">Iné / Pripomienky</h2>
+
+            <div class="field">
+                <label for="pripomienky">Pripomienky</label>
+                <textarea id="pripomienky" name="pripomienky" rows="5" placeholder="Sem vložte svoje pripomienky..."></textarea>
+            </div>
+
+            <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox" name="gdpr" required>
+                    Súhlasím so spracovaním osobných údajov (GDPR)
+                </label>
+            </div>
+        </section>
+
+        <div class="form-actions">
+            <button type="reset" class="btn btn--muted">Obnov formulár</button>
+            <button type="submit" class="btn btn--primary">Odoslať formulár</button>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>
+
